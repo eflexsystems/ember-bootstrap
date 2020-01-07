@@ -114,10 +114,10 @@ module.exports = function() {
               '@embroider/core': '*',
               '@embroider/webpack': '*',
               '@embroider/compat': '*',
-              // remove fastboot dependencies until https://github.com/embroider-build/embroider/issues/160 is resolved.
-              'ember-cli-fastboot': null,
-              'ember-cli-fastboot-testing': null
             }
+          },
+          env: {
+            FASTBOOT_DISABLED: true
           }
         }
       ]

@@ -3,13 +3,28 @@
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
+  let trees = {};
+
+  // Exclude FastBoot tests if FASTBOOT_DISABLED is set,
+  // to enable Embroider tests until https://github.com/embroider-build/embroider/issues/160 is resolved.
+  if (process.env.FASTBOOT_DISABLED) {
+    const Funnel = require('broccoli-funnel');
+    trees.tests = new Funnel('tests', {
+      exclude: ['fastboot/**'],
+    });
+  }
+
   let app = new EmberAddon(defaults, {
     'ember-cli-babel': {
       includePolyfill: !!process.env.BABELPOLYFILL
     },
     autoImport: {
       forbidEval: true
-    }
+    },
+    trees,
+    addons: {
+      blacklist: process.env.FASTBOOT_DISABLED ? ['ember-cli-fastboot-testing'] : []
+    },
   });
 
   /*
