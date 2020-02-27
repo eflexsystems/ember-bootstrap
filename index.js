@@ -41,7 +41,7 @@ const componentDependencies = {
 const minimumBS4Version = '4.0.0-beta';
 
 module.exports = {
-  name: require('./package').name,
+  name: 'ember-bootstrap',
 
   init() {
     this._super.init.apply(this, arguments);
